@@ -10,6 +10,15 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
 	var todos = [ToDo]()
+	@IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
+		guard segue.identifier == "saveSegue" else { return }
+		let sourceVC = segue.source as! ToDoViewController
+		if let todo = sourceVC.todo {
+			let newIndexPath = IndexPath(row: todos.count, section: 0)
+			todos.append(todo)
+			tableView.insertRows(at: [newIndexPath], with: .automatic)
+		}
+	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return todos.count
@@ -43,9 +52,5 @@ class ToDoTableViewController: UITableViewController {
 			todos = ToDo.loadSampleToDos()
 		}
 		navigationItem.leftBarButtonItem = editButtonItem
-	}
-	
-	@IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
-		
 	}
 }
