@@ -9,6 +9,8 @@
 import UIKit
 
 class ToDoViewController: UITableViewController {
+	var isDatePickerHidden = true
+
 	@IBOutlet weak var titleTextField: UITextField!
 	@IBOutlet weak var isCompleteButton: UIButton!
 	@IBOutlet weak var dueDateLabel: UILabel!
@@ -36,6 +38,31 @@ class ToDoViewController: UITableViewController {
 	
 	func updateDueDateLabel(date: Date){
 		dueDateLabel.text = ToDo.dueDateFormatter.string(from: date)
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		let normalHeight = CGFloat(44)
+		let extendedHeight = CGFloat(200)
+		switch indexPath {
+		case [1,0]:
+			return isDatePickerHidden ? normalHeight : extendedHeight
+		case [2, 0]:
+			return extendedHeight
+		default:
+			return normalHeight
+		}
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		switch indexPath {
+		case [1,0]:
+			isDatePickerHidden.toggle()
+			dueDateLabel.textColor = isDatePickerHidden ? .black : tableView.tintColor
+			tableView.beginUpdates()
+			tableView.endUpdates()
+		default:
+			break
+		}
 	}
 	
 	override func viewDidLoad() {
