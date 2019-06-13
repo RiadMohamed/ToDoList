@@ -34,7 +34,7 @@
                                             <state key="normal" image="Unchecked"/>
                                             <state key="selected" image="Checked"/>
                                             <connections>
-                                                <action selector="isCompleteButtonTapped:" destination="xhH-rK-6iY" eventType="touchUpInside" id="77g-75-BRw"/>
+                                                <action selector="isCompleteButtonTapped:" destination="ucl-bW-9vo" eventType="touchUpInside" id="p9n-ty-Wy4"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97X-wn-uX0">
