@@ -8,8 +8,16 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
+	func checkmarkTapped(sender: ToDoCell) {
+		if let indexPath = tableView.indexPath(for: sender) {
+			todos[indexPath.row].isComplete.toggle()
+			tableView.reloadRows(at: [indexPath], with: .automatic)
+		}
+	}
+	
 	var todos = [ToDo]()
+	
 	@IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
 		guard segue.identifier == "saveSegue" else { return }
 		let sourceVC = segue.source as! ToDoViewController
@@ -30,11 +38,13 @@ class ToDoTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier") else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier") as? ToDoCell else {
 			fatalError("Could Not Deque Cell")
 		}
+		cell.delegate = self
 		let todo = todos[indexPath.row]
-		cell.textLabel?.text = todo.title
+		cell.titleLabel.text = todo.title
+		cell.isCompleteButton.isSelected = todo.isComplete
 		return cell
 	}
 	
