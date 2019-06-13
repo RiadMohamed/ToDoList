@@ -44,6 +44,14 @@ class ToDoTableViewController: UITableViewController {
 		}
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "showDetails" {
+			let todoVC = segue.destination as! ToDoViewController
+			let indexPath = tableView.indexPathForSelectedRow!
+			todoVC.todo = todos[indexPath.row]
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if let savedToDos = ToDo.loadToDos() {
