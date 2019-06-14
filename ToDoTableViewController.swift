@@ -13,6 +13,10 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
 		if let indexPath = tableView.indexPath(for: sender) {
 			todos[indexPath.row].isComplete.toggle()
 			tableView.reloadRows(at: [indexPath], with: .automatic)
+<<<<<<< HEAD
+=======
+			ToDo.saveToDos(todos: todos)
+>>>>>>> dev
 		}
 	}
 	
@@ -31,6 +35,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
 				tableView.insertRows(at: [newIndexPath], with: .automatic)
 			}
 		}
+		ToDo.saveToDos(todos: todos)
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,6 +61,15 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
 		if editingStyle == .delete {
 			todos.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .fade)
+			ToDo.saveToDos(todos: todos)
+		}
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "showDetails" {
+			let todoVC = segue.destination as! ToDoViewController
+			let indexPath = tableView.indexPathForSelectedRow!
+			todoVC.todo = todos[indexPath.row]
 		}
 	}
 	
