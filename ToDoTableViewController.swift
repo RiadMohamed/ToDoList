@@ -13,10 +13,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
 		if let indexPath = tableView.indexPath(for: sender) {
 			todos[indexPath.row].isComplete.toggle()
 			tableView.reloadRows(at: [indexPath], with: .automatic)
-<<<<<<< HEAD
-=======
 			ToDo.saveToDos(todos: todos)
->>>>>>> dev
 		}
 	}
 	
